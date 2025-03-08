@@ -13,7 +13,7 @@ execute:
 </h2>
 :::
 
-::: {.g-col-4 .g-start-2 .mt-1}
+::: {.g-col-4 .g-start-2}
 
 
 Dette kort viser boligsalg i Danmark fra den 1. januar 1992 og frem. De røde prikker repræsenterer individuelle ejendomssalg, hvor hver prik angiver en bolig, der er blevet solgt.
