@@ -1,0 +1,142 @@
+---
+title: ""
+execute:
+    echo: false
+---
+
+::: {.grid}
+
+::: {.g-col-10 .g-start-2 .mt-2}
+<h2 style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+  Boligsalg i Danmark
+  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 36px; height: 36px;">
+</h2>
+:::
+
+::: {.g-col-4 .g-start-2 .mt-1}
+
+
+Dette kort viser boligsalg i Danmark fra den 1. januar 1992 og frem. De røde prikker repræsenterer individuelle ejendomssalg, hvor hver prik angiver en bolig, der er blevet solgt.
+
+Varmekortet viser tætheden af boligsalg i Danmark over tid. De farvede områder viser, hvor mange salg der har fundet sted i forskellige dele af landet. Blå og lilla nuancer indikerer færre salg, mens gule grønne, røde områder markerer høj koncentration af bolighandler. Kortet giver et visuelt overblik over, hvor bolighandlen har været mest aktiv over tid.
+
+:::
+
+::: {.g-col-5 .g-start-7}
+
+```{ojs}
+
+import { aq, op } from '@uwdata/arquero'
+
+dt = aq.loadCSV('boligsiden_count.csv');
+data = FileAttachment("boligsiden_count.csv").csv({typed: true})
+raw_data = aq.loadCSV("houses_sold_all.csv");
+postnummer_data = aq.loadCSV("postnummer_data.csv");
+
+data_all = raw_data
+    .derive({datenew: d => op.format_utcdate(d.date)})
+    .derive({year: d => op.year(d.datenew)})
+
+cityNames_ar = dt
+  .rollup({ a: op.array_agg_distinct('cityName') })
+
+```
+
+```{ojs}
+
+
+
+dates = data_all
+    .orderby('year')
+    .rollup({a : op.array_agg_distinct('year')})
+
+year = {
+    let i = 0;
+    while (true) {
+        yield Promises.delay(1000, dates['_data']['a'][0][i++]);
+        if (i == dates['_data']['a'][0].length) {
+            i = 0;
+        }
+    }
+}
+
+filtered = data_all
+    .params({
+        y: year
+    })
+    .filter((d, $) => d.year == $.y)
+
+```
+
+```{ojs}
+
+denmark = FileAttachment("kommuner.geojson").json()
+
+Plot.plot({
+    width: 1000,
+    height: 1000,
+    x: { domain: [7.5,13.5]},    
+    marks: [
+        Plot.frame({fill: "white", stroke: "white", strokeWidth: 1 }),
+        Plot.geo(denmark, {
+            stroke: "gray",
+            strokeWidth: 1,
+            fill: "white"
+        }),
+        Plot.dot(filtered, {x: "coordinates_lon", y: "coordinates_lat", stroke: "red", fill: "red", fillOpacity: 0.2, r: 2}),
+        Plot.density(filtered, {x: 'coordinates_lon', y: 'coordinates_lat', bandwith: 5,
+            fill: 'density',
+            fillOpacity: 0.2
+        }),
+        Plot.axisX({ticks: [], label: []}),
+        Plot.axisY({ticks: [], label: []}),
+        Plot.text([[12.8, 57.7]], {text: [String(year)], textAnchor: "start", fontSize: 24})
+    ]
+})
+
+
+```
+
+```{ojs}
+//| output: false
+
+viewof selectedOptions = Inputs.checkbox(cityNames_ar['_data']['a'][0], {label: "City name"});
+
+```
+
+```{ojs}
+//| output: false
+
+test = dt
+    .params({
+        names: selectedOptions
+    })
+    .filter((d,$) => op.includes($.names, d.cityName))
+    .orderby(aq.desc('year'))
+
+Plot.plot({
+    color: {legend: true},
+    marks: [
+        Plot.lineY(test, {x: 'year', y: 'n', stroke: "cityName"})
+    ]
+})
+
+```
+
+
+```{ojs}
+
+agg_data = data_all
+    .params({
+        y: year
+    })
+    .groupby('year','zipCode').count()
+    .orderby('year')
+    .join_left(postnummer_data, ['zipCode', 'nr'])
+    .filter((d, $) => d.year == $.y)
+
+```
+
+:::
+
+:::

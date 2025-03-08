@@ -1,0 +1,11 @@
+project:
+  title: "Boligsalg"
+
+format:
+  html:
+    page-layout: custom
+    theme: cosmo
+    css: styles.css
+    fontsize: 1.12em
+    toc: false
+    mainfont: "'Source Sans 3', sans-serif"

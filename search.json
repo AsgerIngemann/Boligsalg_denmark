@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "OJS.html",
+    "href": "OJS.html",
+    "title": "Boligsalg i Danmark siden 1992-01-01.",
+    "section": "",
+    "text": "Dette kort viser boligsalg i Danmark fra den 1. januar 1992 og frem. De røde prikker repræsenterer individuelle ejendomssalg, hvor hver prik angiver en bolig, der er blevet solgt.\nVarmekortet viser tætheden af boligsalg i Danmark over tid. De farvede områder viser, hvor mange salg der har fundet sted i forskellige dele af landet. Blå og lilla nuancer indikerer færre salg, mens gule grønne, røde områder markerer høj koncentration af bolighandler. Kortet giver et visuelt overblik over, hvor bolighandlen har været mest aktiv over tid.\n\n\n\nimport { aq, op } from '@uwdata/arquero'\n\ndt = aq.loadCSV('boligsiden_count.csv');\ndata = FileAttachment(\"boligsiden_count.csv\").csv({typed: true})\nraw_data = aq.loadCSV(\"houses_sold_all.csv\");\npostnummer_data = aq.loadCSV(\"postnummer_data.csv\");\n\ndata_all = raw_data\n    .derive({datenew: d =&gt; op.format_utcdate(d.date)})\n    .derive({year: d =&gt; op.year(d.datenew)})\n\ncityNames_ar = dt\n  .rollup({ a: op.array_agg_distinct('cityName') })\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndates = data_all\n    .orderby('year')\n    .rollup({a : op.array_agg_distinct('year')})\n\nyear = {\n    let i = 0;\n    while (true) {\n        yield Promises.delay(1000, dates['_data']['a'][0][i++]);\n        if (i == dates['_data']['a'][0].length) {\n            i = 0;\n        }\n    }\n}\n\nfiltered = data_all\n    .params({\n        y: year\n    })\n    .filter((d, $) =&gt; d.year == $.y)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndenmark = FileAttachment(\"kommuner.geojson\").json()\n\nPlot.plot({\n    width: 1000,\n    height: 1000,\n    x: { domain: [7.5,13.5]},    \n    marks: [\n        Plot.frame({fill: \"white\", stroke: \"white\", strokeWidth: 1 }),\n        Plot.geo(denmark, {\n            stroke: \"gray\",\n            strokeWidth: 1,\n            fill: \"white\"\n        }),\n        Plot.dot(filtered, {x: \"coordinates_lon\", y: \"coordinates_lat\", stroke: \"red\", fill: \"red\", fillOpacity: 0.2, r: 2}),\n        Plot.density(filtered, {x: 'coordinates_lon', y: 'coordinates_lat', bandwith: 5,\n            fill: 'density',\n            fillOpacity: 0.2\n        }),\n        Plot.axisX({ticks: [], label: []}),\n        Plot.axisY({ticks: [], label: []}),\n        Plot.text([[12.8, 57.7]], {text: [String(year)], textAnchor: \"start\", fontSize: 24})\n    ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof selectedOptions = Inputs.checkbox(cityNames_ar['_data']['a'][0], {label: \"City name\"});\n\n\n\n\n\n\n\ntest = dt\n    .params({\n        names: selectedOptions\n    })\n    .filter((d,$) =&gt; op.includes($.names, d.cityName))\n    .orderby(aq.desc('year'))\n\nPlot.plot({\n    color: {legend: true},\n    marks: [\n        Plot.lineY(test, {x: 'year', y: 'n', stroke: \"cityName\"})\n    ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nagg_data = data_all\n    .params({\n        y: year\n    })\n    .groupby('year','zipCode').count()\n    .orderby('year')\n    .join_left(postnummer_data, ['zipCode', 'nr'])\n    .filter((d, $) =&gt; d.year == $.y)"
+  },
+  {
+    "objectID": "OJS.html#denmarks-kort",
+    "href": "OJS.html#denmarks-kort",
+    "title": "Boligsalg i Danmark siden 1992-01-01.",
+    "section": "",
+    "text": "Dette kort viser boligsalg i Danmark fra den 1. januar 1992 og frem. De røde prikker repræsenterer individuelle ejendomssalg, hvor hver prik angiver en bolig, der er blevet solgt.\nVarmekortet viser tætheden af boligsalg i Danmark over tid. De farvede områder viser, hvor mange salg der har fundet sted i forskellige dele af landet. Blå og lilla nuancer indikerer færre salg, mens gule grønne, røde områder markerer høj koncentration af bolighandler. Kortet giver et visuelt overblik over, hvor bolighandlen har været mest aktiv over tid."
+  },
+  {
+    "objectID": "postnumer_data.html",
+    "href": "postnumer_data.html",
+    "title": "Boligsalg i Danmark siden 1992-01-01.",
+    "section": "",
+    "text": "import requests\nimport pandas as pd\n\nres = requests.get(url = \"https://api.dataforsyningen.dk/postnumre\").json()\n\n\ndf = pd.DataFrame(res)"
+  }
+]

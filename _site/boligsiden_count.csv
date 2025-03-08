@@ -1,0 +1,331 @@
+cityName,year,n,rank
+København S,2005,3270,1
+København S,2015,3013,1
+København S,2016,2880,1
+København S,2017,2792,1
+København S,2014,2567,1
+København S,2020,2564,1
+København S,2021,2553,1
+København S,2018,2378,1
+København S,2007,2302,1
+København S,2006,2273,1
+København S,2019,2193,1
+Aarhus C,2021,2123,2
+København S,2004,2105,1
+København S,2023,2100,1
+København S,1998,2021,1
+Aarhus C,2016,2020,2
+Aarhus C,2017,1998,2
+Aarhus C,2020,1998,2
+København S,2012,1979,1
+København S,2013,1953,1
+København S,1999,1911,1
+Aarhus C,2015,1870,2
+København S,1997,1854,1
+København S,2003,1835,1
+København S,2024,1811,1
+Silkeborg,2021,1810,3
+København S,2000,1805,1
+København S,2010,1797,1
+Horsens,2005,1783,2
+Aarhus C,2018,1770,2
+Aarhus C,2005,1767,3
+Horsens,2021,1761,4
+Aalborg,2006,1738,2
+Aarhus C,2019,1722,2
+København S,2001,1721,1
+København Ø,2005,1717,4
+Aalborg,2005,1673,5
+Aalborg,2017,1667,3
+Aalborg,2021,1654,5
+Horsens,2020,1653,3
+Aalborg,1998,1643,2
+København S,2011,1629,1
+København S,2002,1612,1
+Aalborg,1997,1609,2
+København Ø,2017,1585,4
+Horsens,2006,1570,3
+København S,1996,1569,1
+Silkeborg,2020,1567,4
+Aalborg,2016,1551,3
+Aalborg,2015,1548,3
+København S,2022,1546,1
+Roskilde,2005,1543,6
+København Ø,1996,1533,2
+Aalborg,1999,1522,2
+Horsens,2018,1519,3
+Aalborg,1996,1499,3
+Silkeborg,2005,1493,7
+Roskilde,2020,1491,5
+Aarhus C,1996,1490,4
+Frederiksberg,2005,1475,8
+København Ø,2015,1470,4
+Horsens,2019,1464,3
+Roskilde,2021,1459,6
+Silkeborg,2019,1451,4
+Aarhus C,2014,1446,2
+Næstved,2005,1445,9
+København Ø,1999,1442,3
+Aalborg,2007,1437,2
+København Ø,2021,1435,7
+København S,1995,1433,1
+København Ø,2004,1423,2
+København Ø,1997,1422,3
+Aarhus C,2004,1416,3
+Horsens,2017,1414,5
+København Ø,2014,1414,3
+Horsens,2004,1406,4
+Aarhus C,2023,1403,2
+Kolding,2005,1401,10
+Horsens,2007,1400,3
+Roskilde,2016,1393,4
+Roskilde,2019,1390,5
+Horsens,1997,1383,4
+København Ø,1998,1383,3
+København Ø,2020,1381,6
+Aalborg,2001,1377,2
+Aalborg,2018,1352,4
+København Ø,2003,1349,2
+Roskilde,2015,1347,5
+Roskilde,2017,1346,6
+Aalborg,1995,1335,2
+Silkeborg,2006,1329,4
+Aalborg,2020,1327,7
+København S,2008,1326,1
+Aalborg,2000,1322,2
+København Ø,2000,1320,3
+København S,1994,1319,1
+Aalborg,2004,1315,5
+Aalborg,2010,1315,2
+Herning,2006,1309,5
+Roskilde,2018,1309,5
+København Ø,2018,1307,6
+Vejle,2021,1304,8
+Vejle,2006,1303,6
+Næstved,2021,1301,9
+Silkeborg,2004,1298,6
+Aarhus C,1998,1297,4
+Aalborg,2002,1295,2
+Herning,2021,1295,10
+Kolding,1996,1295,5
+København Ø,2019,1293,6
+Aarhus C,1997,1290,5
+Horsens,1998,1288,5
+Roskilde,2023,1288,3
+Silkeborg,2018,1288,7
+Aarhus C,2003,1285,3
+Kolding,1997,1284,6
+Kolding,2019,1282,7
+Kolding,2006,1279,7
+Næstved,2006,1278,8
+Aalborg,1994,1275,2
+Aarhus C,1999,1270,4
+Aalborg,2019,1267,8
+Aarhus C,2024,1267,2
+Horsens,2003,1267,4
+Aarhus C,1995,1266,3
+Horsens,1996,1265,6
+Vejle,2020,1265,8
+København Ø,2016,1263,5
+København Ø,1995,1262,4
+København S,2009,1256,1
+Kolding,1994,1256,3
+København Ø,2001,1254,3
+Kolding,1999,1254,5
+Kolding,2007,1252,4
+København Ø,2002,1251,3
+København S,1993,1248,1
+Horsens,2002,1242,4
+Kolding,1998,1242,6
+Herning,2007,1241,5
+Horsens,2001,1240,4
+Silkeborg,2017,1240,7
+Aarhus C,2000,1237,4
+Aarhus C,2002,1235,5
+Vejle,2007,1235,6
+København Ø,2023,1233,4
+Aarhus C,1994,1232,4
+Silkeborg,1998,1232,7
+Aalborg,2014,1230,4
+Roskilde,1998,1225,8
+Kolding,2020,1224,9
+Kolding,1995,1223,5
+Aalborg,1993,1218,2
+Herning,2020,1216,10
+Kolding,2003,1213,5
+København Ø,2006,1211,9
+Frederiksberg,2015,1209,6
+Horsens,2000,1209,5
+København Ø,2013,1209,2
+Frederiksberg,2017,1207,8
+Roskilde,1996,1206,7
+Aalborg,1992,1205,1
+Aalborg,2013,1205,3
+Horsens,2022,1204,2
+Aarhus C,2010,1203,3
+Horsens,2016,1201,6
+Silkeborg,1997,1199,7
+Roskilde,2010,1196,4
+Silkeborg,2003,1195,6
+Aarhus C,2022,1192,3
+Aalborg,2003,1189,7
+Roskilde,1997,1189,8
+Odense C,1996,1187,8
+Kolding,2018,1186,8
+Horsens,1995,1183,6
+Frederiksberg,1997,1180,9
+Slagelse,2006,1179,10
+Frederiksberg,2016,1173,7
+Frederiksberg,1998,1168,9
+Næstved,2003,1165,8
+Herning,1997,1163,10
+Horsens,2015,1163,7
+Kolding,2004,1163,7
+Roskilde,2004,1162,8
+Næstved,2004,1160,9
+Fredericia,2007,1151,7
+Frederiksberg,2004,1148,10
+Kolding,2002,1148,6
+Silkeborg,1996,1145,9
+Viborg,2007,1144,8
+Frederiksberg,1999,1142,6
+København Ø,2007,1142,9
+Aarhus C,2001,1141,5
+Aarhus C,2013,1141,4
+Vejle,2018,1138,9
+Kolding,1992,1137,2
+Roskilde,1995,1134,7
+Horsens,1999,1133,7
+Horsens,2010,1125,5
+Næstved,1998,1122,10
+Næstved,2019,1122,9
+Silkeborg,1995,1121,8
+Næstved,2002,1120,7
+Silkeborg,2007,1119,10
+Herning,1996,1116,10
+Kolding,2017,1113,9
+Roskilde,2001,1110,6
+København S,1992,1106,3
+Horsens,1994,1103,5
+Næstved,2000,1102,6
+Silkeborg,1999,1100,8
+Næstved,1999,1099,9
+Horsens,2023,1098,5
+Roskilde,2024,1098,3
+København Ø,1994,1096,6
+Horsens,1992,1095,4
+Kolding,2000,1094,7
+Odense C,1995,1093,9
+Roskilde,1999,1089,10
+Vejle,2019,1086,10
+Næstved,2001,1085,7
+Aalborg,2009,1084,2
+Horsens,2024,1084,4
+Herning,2008,1083,2
+Frederiksberg,1994,1076,7
+Roskilde,2003,1075,9
+Silkeborg,2001,1068,8
+Frederiksberg,2000,1067,8
+Valby,2017,1067,10
+Silkeborg,2023,1064,6
+Roskilde,2014,1063,5
+Slagelse,2003,1062,10
+Kolding,1993,1060,3
+Frederiksberg,1995,1059,10
+Herning,2010,1059,6
+Frederiksberg,2014,1055,6
+Aalborg,2022,1054,4
+Silkeborg,2002,1052,8
+Frederiksberg,2018,1051,10
+København Ø,1993,1050,4
+Aalborg,2023,1049,7
+Kolding,2023,1049,8
+Roskilde,2002,1045,9
+Roskilde,1994,1043,8
+Silkeborg,2015,1041,8
+Frederiksberg,2023,1040,9
+Horsens,2008,1037,3
+Roskilde,2000,1036,9
+Silkeborg,2022,1035,5
+Slagelse,2002,1035,10
+København Ø,2012,1034,2
+Silkeborg,1994,1033,9
+Aarhus C,2012,1031,3
+Hjørring,2001,1031,9
+Roskilde,1993,1030,5
+Silkeborg,2000,1028,10
+Herning,1994,1023,10
+Aarhus C,1993,1022,6
+Silkeborg,2024,1022,5
+Silkeborg,1992,1021,5
+Aalborg,2008,1017,4
+København Ø,2010,1015,7
+Horsens,1993,1009,7
+Frederiksberg,2001,1008,10
+Aarhus C,2011,1007,2
+København Ø,1992,1007,6
+Roskilde,2022,998,6
+Silkeborg,1993,996,8
+Silkeborg,2010,995,8
+Næstved,2023,992,10
+Odense C,2010,985,9
+Aarhus C,1992,978,7
+Slagelse,1992,977,8
+Valby,2015,976,9
+Aalborg,2012,970,4
+Aalborg,2024,968,6
+Roskilde,1992,968,9
+Silkeborg,2008,964,5
+Frederiksberg,1993,959,9
+Silkeborg,2016,954,8
+Herning,2022,948,7
+Svendborg,1992,943,10
+Valby,2016,935,9
+Herning,2015,933,10
+Kolding,2016,933,10
+Frederiksberg,2013,932,5
+Herning,1993,925,10
+Aalborg,2011,924,3
+Herning,2024,922,7
+København Ø,2024,919,8
+Viborg,2010,918,10
+Slagelse,2022,910,8
+København Ø,2009,909,3
+Næstved,2024,904,9
+Horsens,2014,902,7
+Næstved,2022,895,9
+Vejle,2022,891,10
+Horsens,2009,884,4
+Roskilde,2012,882,5
+Roskilde,2013,873,6
+Kolding,2024,872,10
+Aarhus C,2008,869,6
+Odense C,2008,869,7
+Silkeborg,2014,861,8
+København Ø,2008,859,8
+København Ø,2011,845,4
+Frederiksberg,2012,841,6
+Aarhus C,2009,839,5
+Kolding,2008,836,9
+Horsens,2012,820,7
+Horsens,2013,818,7
+Roskilde,2008,818,10
+Valby,2014,813,9
+Horsens,2011,806,5
+Herning,2012,803,8
+Herning,2009,778,6
+Roskilde,2011,778,6
+Herning,2011,765,7
+Roskilde,2009,762,7
+Herning,2014,760,10
+Vejle,2009,757,8
+Kolding,2013,748,8
+Frederiksberg,2009,723,9
+Silkeborg,2013,720,9
+Frederiksberg,2011,719,8
+Kolding,2011,719,9
+Silkeborg,2011,714,10
+Kolding,2009,711,10
+Herning,2013,696,10
+Kolding,2012,678,9
+Silkeborg,2012,670,10

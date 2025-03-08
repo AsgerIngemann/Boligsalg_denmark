@@ -1,0 +1,17 @@
+{
+  "hash": "51baaf36eac3cfd606c5cbcb87c5d2fd",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"OJS\"\n---\n\n\n\n## Quarto\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Let's read the downloaded geoJson file with the sf library:\nlibrary(sf)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLinking to GEOS 3.13.0, GDAL 3.10.1, PROJ 9.5.1; sf_use_s2() is TRUE\n```\n\n\n:::\n\n```{.r .cell-code}\nmy_sf <- read_sf(\"kommuner.geojson\")\n```\n:::\n\n```{ojs}\n\nimport { aq, op } from '@uwdata/arquero'\n\ndt = aq.loadCSV('boligsiden_count.csv');\ndata = FileAttachment(\"boligsiden_count.csv\").csv({typed: true})\n\ncityNames_ar = dt\n  .rollup({ a: op.array_agg_distinct('cityName') })\n\ndt\n\n```\n\n```{ojs}\n\nviewof selectedOptions = Inputs.checkbox(cityNames_ar['_data']['a'][0], {label: \"City name\"});\n\nselectedOptions\n\n```\n\n```{ojs}\n\ntest = dt\n    .params({\n        names: selectedOptions\n    })\n    .filter((d,$) => op.includes($.names, d.cityName))\n    .orderby(aq.desc('year'))\n\nPlot.plot({\n    color: {legend: true},\n    marks: [\n        Plot.lineY(test, {x: 'year', y: 'n', stroke: \"cityName\"})\n    ]\n})\n\n```\n\n```{ojs}\n\nclr_ocean = \"#D9F0FF\"\n\n// From CARTOColors Peach 2\nclr_land = \"#facba6\"\n\n\nPlot.plot({\n    width: 1000,\n    height: 1000,\n    marks: [\n        Plot.frame({fill: \"white\", stroke: \"white\", strokeWidth: 1 }),\n        Plot.geo(denmark, {\n            stroke: \"black\",\n            strokeWidth: 0.5,\n            fill: \"lightgray\"\n        })\n    ]\n})\n\n```\n\n```{ojs}\n\ndenmark\n\n```",
+    "supporting": [
+      "OJS_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
