@@ -6,7 +6,7 @@ execute:
 
 ::: {.grid}
 
-::: {.g-col-10 .g-start-2 .mt-2}
+::: {.g-col-10 .g-start-2 .mt-1}
 <h2 style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
   Boligsalg i Danmark
   <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 36px; height: 36px;">
