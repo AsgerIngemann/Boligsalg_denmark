@@ -3,7 +3,6 @@ title: ""
 execute:
     echo: false
 ---
-
 ::: {.grid}
 
 ::: {.g-col-10 .g-start-2 .mt-1}
