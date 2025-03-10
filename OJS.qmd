@@ -20,59 +20,64 @@ Dette kort viser boligsalg i Danmark fra den 1. januar 1992 og frem. De røde pr
 
 Varmekortet viser tætheden af boligsalg i Danmark over tid. De farvede områder viser, hvor mange salg der har fundet sted i forskellige dele af landet. Blå og lilla nuancer indikerer færre salg, mens gule grønne, røde områder markerer høj koncentration af bolighandler. Kortet giver et visuelt overblik over, hvor bolighandlen har været mest aktiv over tid.
 
+Kortet viser et subset af alle solgte boliger svarende til en total af 100.000 salg i alt.
+
 :::
 
 ::: {.g-col-5 .g-start-7}
 
 ```{ojs}
 
-import { aq, op } from '@uwdata/arquero'
+import { aq, op } from '@uwdata/arquero';
 
-dt = aq.loadCSV('boligsiden_count.csv');
-data = FileAttachment("boligsiden_count.csv").csv({typed: true})
-raw_data = aq.loadCSV("houses_sold_all.csv");
-postnummer_data = aq.loadCSV("postnummer_data.csv");
+db = await DuckDBClient.of({houses_sold: FileAttachment("houses_sold.parquet")});
 
-data_all = raw_data
-    .derive({datenew: d => op.format_utcdate(d.date)})
-    .derive({year: d => op.year(d.datenew)})
+raw_data = await aq.loadCSV("houses_sold_all.csv");
+denmark = await FileAttachment("kommuner.geojson").json();
 
-cityNames_ar = dt
-  .rollup({ a: op.array_agg_distinct('cityName') })
+data_query = db.query("SELECT * FROM Houses_sold USING SAMPLE 100000;")
+data_sample = aq.from(data_query)
+
+dates = [
+  1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 
+  2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 
+  2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 
+  2022, 2023, 2024, 2025
+]
 
 ```
 
-```{ojs}
-
-
-
-dates = data_all
-    .orderby('year')
-    .rollup({a : op.array_agg_distinct('year')})
+```{ojs, async: true}
 
 year = {
     let i = 0;
     while (true) {
-        yield Promises.delay(1000, dates['_data']['a'][0][i++]);
-        if (i == dates['_data']['a'][0].length) {
+        yield Promises.delay(1000, dates[i++]);
+        if (i == dates.length) {
             i = 0;
         }
     }
 }
 
-filtered = data_all
+filtered = data_sample
     .params({
         y: year
     })
     .filter((d, $) => d.year == $.y)
 
+filtered_by = postnrtable
+    .params({
+        y: year,
+        nr: nummer,
+        at: addressInput,
+    })
+    .filter((d, $) => d.year == $.y && d.zipCode == $.nr && op.includes(d.addressType, $.at));
+
 ```
 
-```{ojs}
+```{ojs, async: true}
 
-denmark = FileAttachment("kommuner.geojson").json()
-
-Plot.plot({
+await Plot.plot({
     width: 1000,
     height: 1000,
     x: { domain: [7.5,13.5]},    
@@ -88,8 +93,8 @@ Plot.plot({
             fill: 'density',
             fillOpacity: 0.2
         }),
-        Plot.axisX({ticks: [], label: []}),
-        Plot.axisY({ticks: [], label: []}),
+        Plot.axisX({ticks: [], label: [], labelArrow: null}),
+        Plot.axisY({ticks: [], label: [], labelArrow: null}),
         Plot.text([[12.8, 57.7]], {text: [String(year)], textAnchor: "start", fontSize: 24})
     ]
 })
@@ -97,43 +102,119 @@ Plot.plot({
 
 ```
 
-```{ojs}
-//| output: false
+:::
 
-viewof selectedOptions = Inputs.checkbox(cityNames_ar['_data']['a'][0], {label: "City name"});
+::: {.g-col-7 .g-start-2 .mt-1}
+<h2 style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+  Vælg specifik postnummer at kigge på
+</h2>
+:::
+
+::: {.g-col-5 .g-start-2}
+
+```{ojs}
+
+viewof nummer = Inputs.text({label: "Postnummer:", placeholder: "Skriv et postnummer", value: 2100, });
 
 ```
 
-```{ojs}
-//| output: false
+På dette kort kan du vælge et specifikt postnummer for at se detaljer om boligtyper i området. Kortet viser eksempelvis postnummeret 2100 og giver mulighed for at udforske forskellige boligtyper såsom ejerlejligheder, villaer, sommerhuse, rækkehuse, villalejligheder og gårde. Her vises **alle** boligsalg for det givne postnummer.
 
-test = dt
-    .params({
-        names: selectedOptions
-    })
-    .filter((d,$) => op.includes($.names, d.cityName))
-    .orderby(aq.desc('year'))
+:::
+
+::: {.g-col-4 .g-start-8}
+
+```{ojs}
+
+viewof addressInput = Inputs.checkbox(["Ejerleglighed", "Villa", "Sommerhus", "Rækkehus", "Villalejlighed",
+"Gård"], {label: "Boligtype:"});
+
+```
+
+:::
+
+::: {.g-col-4 .g-start-5 .mt-5}
+
+```{ojs}
 
 Plot.plot({
-    color: {legend: true},
+    width: 1000,
+    height: 1000,
     marks: [
-        Plot.lineY(test, {x: 'year', y: 'n', stroke: "cityName"})
+        Plot.frame({fill: "white", stroke: "white", strokeWidth: 1 }),
+        Plot.geo(geo_data, {
+            stroke: "black",
+            strokeWidth: 1,
+            fill: "white"
+        }),
+        Plot.dot(filtered_by, {x: "coordinates_lon", y: "coordinates_lat", stroke: "red", fill: "red", fillOpacity: 0.2, r: 5}),
+        Plot.density(filtered_by, {x: 'coordinates_lon', y: 'coordinates_lat', bandwith: 5,
+            fill: 'density',
+            fillOpacity: 0.1
+        }),
+        Plot.axisX({ticks: [], label: [], labelArrow: null}),
+        Plot.axisY({ticks: [], label: [], labelArrow: null})
     ]
 })
 
 ```
 
+:::
+
+::: {.g-col-1 .g-start-9 .mt-5}
 
 ```{ojs}
 
-agg_data = data_all
-    .params({
-        y: year
-    })
-    .groupby('year','zipCode').count()
-    .orderby('year')
-    .join_left(postnummer_data, ['zipCode', 'nr'])
-    .filter((d, $) => d.year == $.y)
+year
+
+```
+
+:::
+
+::: {.g-col-10 .g-start-2 .mt-5 .align-items-center}
+
+:::
+
+```{ojs}
+
+async function fetchGeoJSON(url) {
+    if (!url) {
+        console.error("Invalid URL");
+        return null;
+    }
+    try {
+        const res = await fetch(url, {
+            method: "GET"
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+
+        const data = await res.json(); // Convert response to JSON
+        console.log(data); // Do something with the data
+        return data;
+    } catch (error) {
+        console.error("Error fetching GeoJSON:", error);
+    }
+}
+
+url_postnr = nummer.length === 4 ? `https://api.dataforsyningen.dk/vejstykker?postnr=${nummer}&format=geojson` : null
+geo_data = fetchGeoJSON(url_postnr);
+
+```
+
+::: {.g-col-10 .g-start-2 .align-items-center}
+
+```{ojs}
+
+pstnrquery = nummer.length === 4 ? `SELECT * FROM Houses_sold WHERE zipCode = ${nummer}` : null
+
+selectedquery = await db.query(pstnrquery)
+
+postnrtable = aq.from(selectedquery)
+    .derive({datenew: d => op.format_utcdate(d.date)})
+    .derive({year: d => op.year(d.datenew)})
 
 ```
 

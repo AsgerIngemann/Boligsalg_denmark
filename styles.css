@@ -10,3 +10,43 @@
 .plot-container .plot {
     width: 70%;
 }
+
+.observablehq--error {
+    display: none !important;
+}
+
+.callout-important.callout.callout-style-default {
+    display: none !important;
+}
+
+.oi-3a86ea-input {
+    margin-left: 1em;
+    border-width: 1px;
+}
+
+.oi-3a86ea-input>input{
+    border-width: 1px;
+    border-color: black;
+    text-align: right;
+    padding-right: 0.2em;
+}
+
+.sourceCode cell-code{
+    display: none !important;
+}
+
+.sourceCode cell-code hidden{
+    display: none !important;
+}
+
+pre.sourceCode{
+    display: none !important;
+}
+
+.sourceCode cell-code{
+    display: none !important;
+}
+
+div.sourceCode{
+    display: none !important;
+}
