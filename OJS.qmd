@@ -32,7 +32,6 @@ import { aq, op } from '@uwdata/arquero';
 
 db = await DuckDBClient.of({houses_sold: FileAttachment("houses_sold.parquet")});
 
-raw_data = await aq.loadCSV("houses_sold_all.csv");
 denmark = await FileAttachment("kommuner.geojson").json();
 
 data_query = db.query("SELECT * FROM Houses_sold USING SAMPLE 100000;")
@@ -213,8 +212,6 @@ pstnrquery = nummer.length === 4 ? `SELECT * FROM Houses_sold WHERE zipCode = ${
 selectedquery = await db.query(pstnrquery)
 
 postnrtable = aq.from(selectedquery)
-    .derive({datenew: d => op.format_utcdate(d.date)})
-    .derive({year: d => op.year(d.datenew)})
 
 ```
 
